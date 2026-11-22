@@ -18,18 +18,21 @@ import { site } from '../data/site';
     </p>
   </div>
 
+  <!-- Shooting stars are added here by the script below -->
+  <div class="stars" aria-hidden="true"></div>
+
   <!-- Mail moon: emails the site owner -->
   <a class="sky-link moon" href={`mailto:${site.email}`} aria-label={`Email ${site.name}`}>
     <span class="halo" aria-hidden="true"></span>
     <svg viewBox="0 0 64 48" aria-hidden="true">
-      <rect x="3" y="3" width="58" height="42" rx="5" fill="#fff" />
-      <path d="M5 7 L32 28 L59 7" fill="none" stroke="#9fb0e6" stroke-width="3.5" stroke-linejoin="round" />
+      <rect x="3" y="3" width="58" height="42" rx="5" fill="#eef1ff" />
+      <path d="M5 7 L32 28 L59 7" fill="none" stroke="#aebbe8" stroke-width="3.5" stroke-linejoin="round" />
     </svg>
     <span class="label">Email me</span>
   </a>
 
   <!-- Pulsing resume: downloads the PDF -->
-  <a class="sky-link resume" href={site.resumePath} download aria-label="Download resume (PDF)">
+  <a class="sky-link resume" href={site.resumePath} download={site.resumeFileName} aria-label="Download resume (PDF)">
     <svg viewBox="0 0 48 60" aria-hidden="true">
       <path d="M4 4 H32 L44 16 V56 H4 Z" fill="#fff8ec" />
       <path d="M32 4 V16 H44" fill="#e6d6bd" />
@@ -41,16 +44,42 @@ import { site } from '../data/site';
     <span class="label">Resume</span>
   </a>
 
-  <!-- Distant pink mesa on the horizon -->
-  <svg class="far-cliffs" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+  <!-- Distant pink mesa on the horizon, lit from the left -->
+  <svg class="far-cliffs" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
     <defs>
-      <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#e3aebb" />
-        <stop offset="1" stop-color="#b98aa8" />
+      <linearGradient id="farLit" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eec6cc" />
+        <stop offset="1" stop-color="#cf9cb1" />
+      </linearGradient>
+      <linearGradient id="farShade" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#b98aa6" />
+        <stop offset="1" stop-color="#8f6890" />
+      </linearGradient>
+      <linearGradient id="farMist" x1="0" y1="0" x2="0" y2="1">
+        <stop offset=".45" stop-color="#cdb9e2" stop-opacity="0" />
+        <stop offset="1" stop-color="#bfaedb" stop-opacity=".5" />
       </linearGradient>
     </defs>
-    <path d="M0 60 L6 22 L30 16 L120 14 L150 20 L210 18 L250 28 L262 40 L300 44 L300 60 Z" fill="url(#far)" />
-    <path d="M40 18 V60 M70 16 V60 M104 15 V60 M168 19 V60 M222 21 V60" stroke="#a87896" stroke-width="2" opacity=".5" />
+    <!-- shadowed body -->
+    <path d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z" fill="url(#farShade)" />
+    <!-- sunlit face -->
+    <path d="M8 20 L22 14 L122 14 L119 60 L0 60 Z" fill="url(#farLit)" />
+    <!-- lower step on the right -->
+    <path d="M226 32 L264 31 L262 60 L222 60 Z" fill="url(#farLit)" opacity=".85" />
+    <path d="M222 28 L300 27 L304 31 L226 32 Z" fill="#ecc8cf" />
+    <!-- flat top catching the light -->
+    <path d="M22 14 L205 13 L206 16 L24 17 Z" fill="#f7dcdc" />
+    <!-- eroded vertical ridges -->
+    <g stroke-width="2.2">
+      <path d="M30 17 V60 M47 17 V60 M64 16 V60 M83 16 V60 M101 16 V60" stroke="#b9849e" opacity=".75" />
+      <path d="M34 17 V60 M52 17 V60 M69 16 V60 M88 16 V60 M106 16 V60" stroke="#f8dede" opacity=".5" />
+      <path d="M140 16 V60 M157 16 V60 M175 16 V60 M193 16 V60 M240 32 V60 M252 32 V60" stroke="#8f6890" opacity=".5" />
+      <path d="M146 16 V60 M168 16 V60 M186 16 V60" stroke="#dcb8ca" opacity=".45" />
+    </g>
+    <!-- deep crevice where light turns to shadow -->
+    <path d="M119 14 L124 14 L122 60 L117 60 Z" fill="#8f6890" opacity=".6" />
+    <!-- sea mist at the base -->
+    <path d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z" fill="url(#farMist)" />
   </svg>
 
   <div class="sea" aria-hidden="true">
@@ -59,11 +88,58 @@ import { site } from '../data/site';
     </svg>
   </div>
 
-  <!-- Rocks in the water -->
+  <div class="haze" aria-hidden="true"></div>
+
+  <!-- Tiny boat carrying the credit for the scene's inspiration.
+       Hover or keyboard focus shows the credit; a tap toggles it on phones. -->
+  <div class="boat">
+    <button type="button" aria-expanded="false" aria-describedby="boat-credit" aria-label="Scene credit">
+      <svg viewBox="0 0 40 36" aria-hidden="true">
+        <path d="M19 9 L19 24 L9 24 Z" fill="#f1c9b5" />
+        <path d="M21 4 L21 24 L33 24 Z" fill="#fff4e8" />
+        <path d="M20 3 V27" stroke="#4c2230" stroke-width="1.5" />
+        <path d="M3 26 H37 L31 32 H9 Z" fill="#5a2e36" />
+        <path d="M3 26 H37 L36 27.5 H4 Z" fill="#c97c68" />
+      </svg>
+    </button>
+    <p class="credit" id="boat-credit" role="note">
+      Scene inspired by the airbrush art of Shusei Nagaoka, <cite>Androla in Labyrinth</cite> (1984)
+    </p>
+  </div>
+
+  <!-- The resume's reflection on the water -->
+  <div class="reflection" aria-hidden="true">
+    <svg viewBox="0 0 48 60">
+      <path d="M4 4 H32 L44 16 V56 H4 Z" fill="#fff8ec" />
+      <path d="M32 4 V16 H44" fill="#e6d6bd" />
+      <rect x="10" y="22" width="26" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="30" width="22" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="38" width="26" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="46" width="16" height="3" rx="1.5" fill="#b9a6c9" />
+    </svg>
+  </div>
+
+  <!-- Rock in the water, lit from the left -->
   <svg class="rocks" viewBox="0 0 120 40" aria-hidden="true">
-    <path d="M2 40 L10 14 L40 8 L70 12 L86 24 L100 30 L118 40 Z" fill="#7a3d3c" />
-    <path d="M10 14 L40 8 L46 40 L2 40 Z" fill="#a65a50" />
+    <defs>
+      <linearGradient id="rockLit" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#dc977d" />
+        <stop offset="1" stop-color="#a65a50" />
+      </linearGradient>
+    </defs>
+    <path d="M2 40 L10 14 L40 8 L70 12 L86 24 L100 30 L118 40 Z" fill="#6b3036" />
+    <path d="M70 12 L86 24 L82 40 L66 40 L64 15 Z" fill="#8a4442" />
+    <path d="M10 14 L40 8 L44 40 L2 40 Z" fill="url(#rockLit)" />
+    <path d="M10 14 L40 8 L70 12 L64 15 L40 12 L14 17 Z" fill="#efc0a6" />
+    <g stroke-width="1.6">
+      <path d="M18 16 L16 40 M28 13 L27 40 M36 11 L37 40" stroke="#8a4442" opacity=".6" />
+      <path d="M21 16 L19 40 M31 12 L30 40" stroke="#f0b89c" opacity=".55" />
+      <path d="M52 13 L52 40 M60 14 L59 40 M90 28 L92 40" stroke="#4c2230" opacity=".5" />
+    </g>
+    <path d="M0 40 Q18 33 40 37 T80 37 T120 40 Z" fill="#f4f7ff" opacity=".75" />
   </svg>
+
+  <div class="wash" aria-hidden="true"></div>
 
   <!-- Main columnar cliff -->
   <svg class="cliff" viewBox="0 0 420 820" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
@@ -88,12 +164,32 @@ import { site } from '../data/site';
     <path d="M180 20 L240 8 L236 760 L184 758 Z" fill="url(#lit)" />
     <path d="M262 6 L312 3 L310 760 L264 760 Z" fill="url(#lit)" />
     <path d="M336 2 L384 1 L382 760 L338 760 Z" fill="url(#lit)" />
+    <!-- sunlit left edges of each column -->
+    <g fill="#e8a68c" opacity=".7">
+      <path d="M75 300 L82 294 L84 768 L78 770 Z" />
+      <path d="M120 120 L128 115 L129 761 L122 762 Z" />
+      <path d="M180 20 L188 19 L190 759 L184 758 Z" />
+      <path d="M262 6 L270 5 L271 760 L264 760 Z" />
+      <path d="M336 2 L344 2 L345 760 L338 760 Z" />
+    </g>
+    <!-- broken steps and ledges partway down the columns -->
+    <g fill="#d48c74">
+      <path d="M112 470 L122 462 L168 466 L166 474 L114 478 Z" />
+      <path d="M236 300 L262 292 L264 302 L238 310 Z" />
+      <path d="M310 520 L336 512 L338 522 L312 530 Z" />
+      <path d="M40 600 L74 588 L78 600 L42 612 Z" />
+    </g>
+    <g fill="#4c2230" opacity=".6">
+      <path d="M112 478 L166 474 L166 486 L112 490 Z" />
+      <path d="M238 310 L264 302 L264 314 L238 322 Z" />
+      <path d="M312 530 L338 522 L338 534 L312 542 Z" />
+    </g>
     <!-- fractures -->
     <g stroke="#4c2230" stroke-width="3" opacity=".55">
       <path d="M80 420 L108 412 M124 260 L166 248 M126 520 L164 512 M186 180 L232 170 M188 430 L232 422" />
       <path d="M268 120 L308 116 M266 340 L308 334 M268 600 L308 596 M340 220 L380 218 M340 470 L380 466" />
     </g>
-    <rect width="420" height="820" fill="url(#fade)" />
+    <path d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z" fill="url(#fade)" />
     <!-- rubble at the base -->
     <path d="M0 820 L6 770 L40 752 L70 764 L96 742 L140 750 L170 736 L214 748 L250 734 L300 746 L360 732 L420 740 L420 820 Z" fill="#7a3d3c" />
     <path d="M6 770 L40 752 L52 790 L18 800 Z M96 742 L140 750 L134 784 L100 780 Z M214 748 L250 734 L258 770 L222 778 Z" fill="#b0645a" />
@@ -104,9 +200,123 @@ import { site } from '../data/site';
   <a class="dig" href="#projects">Dig into my projects <span aria-hidden="true">↓</span></a>
 </header>
 
+<script>
+  // Occasional shooting star: every 5-13 seconds a streak crosses a random
+  // part of the upper sky. Skipped entirely when reduce-motion is on.
+  const sky = document.querySelector<HTMLElement>('.beach .stars');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function shoot() {
+    if (sky && !still.matches && !document.hidden) {
+      const star = document.createElement('span');
+      star.className = 'shooting';
+      star.style.left = `${10 + Math.random() * 70}%`;
+      star.style.top = `${4 + Math.random() * 40}%`;
+      // Mostly falling down and to the right, sometimes to the left.
+      const tilt = 18 + Math.random() * 20;
+      const angle = Math.random() < 0.7 ? tilt : 180 - tilt;
+      const distance = 220 + Math.random() * 180;
+      sky.append(star);
+      star
+        .animate(
+          [
+            { transform: `rotate(${angle}deg) translateX(0)`, opacity: 0 },
+            { opacity: 1, offset: 0.15 },
+            { opacity: 0.9, offset: 0.7 },
+            { transform: `rotate(${angle}deg) translateX(${distance}px)`, opacity: 0 },
+          ],
+          { duration: 700 + Math.random() * 500, easing: 'ease-out' },
+        )
+        .finished.then(() => star.remove());
+    }
+    setTimeout(shoot, 5000 + Math.random() * 8000);
+  }
+  setTimeout(shoot, 1500 + Math.random() * 2500);
+
+  // Tap the boat to show or hide the credit (hover/focus also shows it).
+  const boatButton = document.querySelector<HTMLButtonElement>('.boat button');
+  boatButton?.addEventListener('click', () => {
+    const open = boatButton.getAttribute('aria-expanded') === 'true';
+    boatButton.setAttribute('aria-expanded', String(!open));
+  });
+</script>
+
 <style>
+  /* Tiny boat on the sea, gently bobbing */
+  .boat {
+    position: absolute;
+    left: 42%;
+    top: calc(var(--horizon) + 3%);
+    z-index: 6;
+  }
+  .boat button {
+    display: block;
+    width: clamp(24px, 2.4vw, 34px);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  .boat svg { display: block; width: 100%; height: auto; }
+  .boat button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-2px) rotate(2deg); }
+  }
+  .credit {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    width: max-content;
+    max-width: min(260px, 70vw);
+    margin: 0;
+    padding: 0.45rem 0.7rem;
+    border-radius: 10px;
+    background: rgb(30 25 60 / 0.85);
+    color: #f3ecff;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    text-align: center;
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  .credit cite { font-style: italic; }
+  .boat:hover .credit,
+  .boat button:focus-visible + .credit,
+  .boat button[aria-expanded='true'] + .credit {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .stars {
+    position: absolute;
+    inset: 0 0 calc(100% - var(--horizon)) 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .stars :global(.shooting) {
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(to right, rgb(255 255 255 / 0), rgb(255 255 255 / 0.95));
+    filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px rgb(200 210 255 / 0.8));
+    transform-origin: right center;
+    opacity: 0;
+  }
+
   .beach {
     --horizon: 60%;
+    --resume-top: 40%;
+    --rw: clamp(40px, 4.5vw, 64px); /* resume width; its height is 1.25x */
+    /* Sand grain textures: SVG noise, thresholded into distinct specks */
+    --sand-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.17 0 0 0 0 0.1 3.4 0 0 0 -1.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+    --sand-mid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.4 0 0 0 0 0.27 0 2.8 0 0 -1.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+    --sand-glint: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='1' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.98 0 0 0 0 0.92 0 0 3.6 0 -1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
     position: relative;
     height: 100svh;
     min-height: 560px;
@@ -121,11 +331,11 @@ import { site } from '../data/site';
     isolation: isolate;
   }
 
-  /* Airbrush grain over the whole scene */
+  /* Airbrush grain over the sky only, so the sea stays glassy smooth */
   .beach::after {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: 0 0 calc(100% - var(--horizon)) 0;
     background-image: var(--grain);
     opacity: 0.35;
     mix-blend-mode: soft-light;
@@ -137,15 +347,16 @@ import { site } from '../data/site';
     position: absolute;
     top: clamp(1.5rem, 9vh, 6rem);
     left: 6vw;
-    right: 6vw;
+    /* Stay in the open sky, left of the mail moon (which sits at 60%) */
+    max-width: 50%;
     z-index: 6;
     color: #fff;
     text-shadow: 0 2px 18px rgb(20 20 70 / 0.55);
   }
   .intro h1 {
     margin: 0;
-    font-size: clamp(2.4rem, 7vw, 5.5rem);
-    line-height: 1;
+    font-size: clamp(2rem, 5.2vw, 4.6rem);
+    line-height: 1.02;
     letter-spacing: 0.01em;
   }
   .titles {
@@ -184,12 +395,22 @@ import { site } from '../data/site';
 
   .moon {
     width: clamp(64px, 9vw, 120px);
-    left: 50%;
-    top: 16%;
-    filter: drop-shadow(0 0 18px rgb(255 255 255 / 0.65));
-    transition: transform 0.25s;
+    left: 60%;
+    top: 7%;
   }
-  .moon:hover { transform: scale(1.06); }
+  /* Hazy and faint, like a moon far off in the sky, but still glowing.
+     Hovering brings it into focus. */
+  .moon svg {
+    opacity: 0.6;
+    filter: blur(0.6px) drop-shadow(0 0 14px rgb(235 240 255 / 0.9)) drop-shadow(0 0 34px rgb(200 215 255 / 0.6));
+    transition: opacity 0.3s, filter 0.3s, transform 0.25s;
+  }
+  .moon:hover svg,
+  .moon:focus-visible svg {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 14px rgb(235 240 255 / 0.95)) drop-shadow(0 0 34px rgb(200 215 255 / 0.7));
+    transform: scale(1.06);
+  }
   .halo {
     position: absolute;
     inset: -70%;
@@ -198,9 +419,9 @@ import { site } from '../data/site';
   }
 
   .resume {
-    width: clamp(40px, 4.5vw, 64px);
+    width: var(--rw);
     left: 12vw;
-    top: 44%;
+    top: var(--resume-top);
     animation: pulse 2.4s ease-in-out infinite;
   }
   @keyframes pulse {
@@ -254,16 +475,67 @@ import { site } from '../data/site';
     z-index: 3;
   }
 
-  .sand {
+  .sand,
+  .wash {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 22%;
-    background: var(--grain-coarse), linear-gradient(to bottom, #e9dcc3, var(--sand));
     border-top-left-radius: 50% 30%;
     border-top-right-radius: 60% 10%;
     z-index: 4;
+  }
+  .sand {
+    height: 22%;
+    /* Strongly grainy on purpose, to contrast with the smooth sea.
+       Four noise layers at different tile sizes so the grain never looks
+       tiled: bright glints, big dark grains, mid grains, fine dust. */
+    background:
+      var(--sand-glint) 0 0 / 150px,
+      var(--sand-dark) 0 0 / 180px,
+      var(--sand-mid) 30px 60px / 110px,
+      var(--grain-coarse) 70px 20px / 90px,
+      linear-gradient(to bottom, #f0e2c4, #dcc39a 45%, #cfb486 70%, #b99a6c);
+  }
+  /* Wet foam line where the wave washes up the beach */
+  .wash {
+    height: calc(22% + 10px);
+    background: linear-gradient(to bottom, rgb(246 250 255 / 0.9), rgb(200 220 245 / 0.55) 12px, transparent 22px);
+    z-index: 3;
+  }
+
+  /* Hazy glow along the horizon, like the painting's distance */
+  .haze {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--horizon) - 10%);
+    height: 16%;
+    background: linear-gradient(to bottom, transparent, rgb(226 206 236 / 0.45) 62%, rgb(190 200 240 / 0.15) 75%, transparent);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* The resume mirrored in the water: as far below the horizon as the
+     resume is above it, flipped, faded and slightly blurred. */
+  .reflection {
+    position: absolute;
+    left: 12vw;
+    width: var(--rw);
+    top: calc(2 * var(--horizon) - var(--resume-top) - 1.25 * var(--rw));
+    transform: scaleY(-1);
+    opacity: 0.35;
+    filter: blur(1.5px);
+    -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+    mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+    pointer-events: none;
+    z-index: 2;
+    animation: ripple 2.4s ease-in-out infinite;
+  }
+  .reflection svg { width: 100%; height: auto; display: block; }
+  @keyframes ripple {
+    0%, 100% { transform: scaleY(-1) scaleX(1); opacity: 0.3; }
+    50% { transform: scaleY(-1.05) scaleX(1.08); opacity: 0.45; }
   }
 
   .dig {
@@ -283,9 +555,11 @@ import { site } from '../data/site';
   .dig:hover, .dig:focus-visible { background: rgb(60 35 40 / 0.95); }
 
   @media (max-width: 700px) {
-    .intro { top: 6svh; }
-    .moon { left: 26vw; top: 34%; }
-    .resume { left: 8vw; top: 48%; }
+    .intro { top: 6svh; right: 6vw; max-width: none; }
+    .intro h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
+    .beach { --resume-top: 44%; }
+    .moon { left: auto; right: 10vw; top: 22%; }
+    .resume, .reflection { left: 8vw; }
     .cliff { max-width: 40vw; height: 72%; }
     .far-cliffs { width: 44vw; }
   }
@@ -295,7 +569,8 @@ import { site } from '../data/site';
       animation: none;
       filter: drop-shadow(0 0 16px rgb(255 240 210 / 0.9));
     }
-    .foam { animation: none; }
-    .moon, .label { transition: none; }
+    .foam, .reflection, .boat button { animation: none; }
+    .credit { transition: none; }
+    .moon svg, .label { transition: none; }
   }
 </style>

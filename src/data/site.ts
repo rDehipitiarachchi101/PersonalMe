@@ -1,8 +1,9 @@
-// Personal details shown on the page. Replace the placeholders with your own.
+// Personal details shown on the page.
 export const site = {
-  name: 'Your Name',
-  titles: ['Software Engineer', 'Front-End Developer'],
-  email: 'you@example.com',
-  // Put your resume at public/resume.pdf (the current file is a placeholder).
+  name: 'Rison Dehipitiarachchi',
+  titles: ['Software Engineer', 'AI Engineer'],
+  email: 'donandrew.dehipitiarachchi@gmail.com',
+  // The resume lives at public/resume.pdf; visitors download it under this name.
   resumePath: '/resume.pdf',
+  resumeFileName: 'Rison_Dehipitiarachchi_Resume.pdf',
 };
