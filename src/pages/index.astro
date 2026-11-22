@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BeachScene from '../components/BeachScene.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { site } from '../data/site';
+
+// Featured projects first, then newest first.
+const projects = (await getCollection('projects')).sort(
+  (a, b) =>
+    Number(b.data.featured) - Number(a.data.featured) ||
+    b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content={`${site.name}: ${site.titles.join(', ')}. Portfolio and projects.`} />
+    <title>{site.name} | Portfolio</title>
+  </head>
+  <body>
+    <BeachScene />
+
+    <main id="projects" class="underground">
+      <div class="inner">
+        <h2>Projects</h2>
+        <p class="lede">Dug up from beneath the sand. Featured work first.</p>
+        <div class="list">
+          {projects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Get in touch: <a href={`mailto:${site.email}`}>{site.email}</a>
+          <span aria-hidden="true"> · </span>
+          <a href={site.resumePath} download>Download resume</a>
+        </p>
+      </footer>
+    </main>
+
+    <BackToTop />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --sand: #d9c4a0;
+    /* Fine noise texture, used to give the scene an airbrushed grain */
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* Coarser speckle for sand and the ground below it */
+    --grain-coarse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.24 0 0 0 0 0.16 0 0 0 1.6 -0.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+    color-scheme: light;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #2a1b2c;
+    font-family: 'Avenir Next', Avenir, 'Futura', 'Century Gothic', system-ui, sans-serif;
+  }
+  h1, h2, h3 { font-family: 'Futura', 'Avenir Next', 'Century Gothic', system-ui, sans-serif; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<style>
+  /* The ground beneath the sand: gets darker the deeper you scroll */
+  .underground {
+    position: relative;
+    padding: clamp(2.5rem, 6vw, 5rem) 6vw 2rem;
+    background:
+      var(--grain-coarse),
+      repeating-linear-gradient(to bottom, transparent 0 140px, rgb(60 30 30 / 0.08) 140px 146px),
+      linear-gradient(to bottom, var(--sand) 0%, #b8946c 25%, #8a6248 50%, #4e3238 75%, #2a1b2c 100%);
+    color: #2b1d24;
+    min-height: 120vh;
+    box-sizing: border-box;
+  }
+  .inner { max-width: 960px; margin: 0 auto; }
+  h2 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); }
+  .lede { margin: 0.4rem 0 2rem; color: #5a3c34; }
+  .list { display: grid; gap: 2rem; }
+  footer {
+    max-width: 960px;
+    margin: 5rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(255 248 236 / 0.25);
+    color: #f3e6d2;
+    text-align: center;
+  }
+  footer a { color: #ffd99a; }
+</style>

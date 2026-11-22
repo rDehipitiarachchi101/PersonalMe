@@ -1,0 +1,301 @@
+---
+// The first screen: a beach built from code layers (sky, distant cliffs, sea,
+// main cliff, sand). Inspired by 70s/80s airbrush space art.
+// The mail "moon" and the pulsing resume float in the sky.
+import { site } from '../data/site';
+---
+
+<header class="beach" id="top">
+  <div class="intro">
+    <h1>{site.name}</h1>
+    <p class="titles">
+      {site.titles.map((t, i) => (
+        <>
+          {i > 0 && <span class="sep" aria-hidden="true"> · </span>}
+          <span>{t}</span>
+        </>
+      ))}
+    </p>
+  </div>
+
+  <!-- Mail moon: emails the site owner -->
+  <a class="sky-link moon" href={`mailto:${site.email}`} aria-label={`Email ${site.name}`}>
+    <span class="halo" aria-hidden="true"></span>
+    <svg viewBox="0 0 64 48" aria-hidden="true">
+      <rect x="3" y="3" width="58" height="42" rx="5" fill="#fff" />
+      <path d="M5 7 L32 28 L59 7" fill="none" stroke="#9fb0e6" stroke-width="3.5" stroke-linejoin="round" />
+    </svg>
+    <span class="label">Email me</span>
+  </a>
+
+  <!-- Pulsing resume: downloads the PDF -->
+  <a class="sky-link resume" href={site.resumePath} download aria-label="Download resume (PDF)">
+    <svg viewBox="0 0 48 60" aria-hidden="true">
+      <path d="M4 4 H32 L44 16 V56 H4 Z" fill="#fff8ec" />
+      <path d="M32 4 V16 H44" fill="#e6d6bd" />
+      <rect x="10" y="22" width="26" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="30" width="22" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="38" width="26" height="3" rx="1.5" fill="#b9a6c9" />
+      <rect x="10" y="46" width="16" height="3" rx="1.5" fill="#b9a6c9" />
+    </svg>
+    <span class="label">Resume</span>
+  </a>
+
+  <!-- Distant pink mesa on the horizon -->
+  <svg class="far-cliffs" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e3aebb" />
+        <stop offset="1" stop-color="#b98aa8" />
+      </linearGradient>
+    </defs>
+    <path d="M0 60 L6 22 L30 16 L120 14 L150 20 L210 18 L250 28 L262 40 L300 44 L300 60 Z" fill="url(#far)" />
+    <path d="M40 18 V60 M70 16 V60 M104 15 V60 M168 19 V60 M222 21 V60" stroke="#a87896" stroke-width="2" opacity=".5" />
+  </svg>
+
+  <div class="sea" aria-hidden="true">
+    <svg class="foam" viewBox="0 0 1200 40" preserveAspectRatio="none">
+      <path d="M0 22 C120 8 220 34 360 20 S600 6 760 22 S1020 36 1200 18 V40 H0 Z" fill="#f4f7ff" opacity=".85" />
+    </svg>
+  </div>
+
+  <!-- Rocks in the water -->
+  <svg class="rocks" viewBox="0 0 120 40" aria-hidden="true">
+    <path d="M2 40 L10 14 L40 8 L70 12 L86 24 L100 30 L118 40 Z" fill="#7a3d3c" />
+    <path d="M10 14 L40 8 L46 40 L2 40 Z" fill="#a65a50" />
+  </svg>
+
+  <!-- Main columnar cliff -->
+  <svg class="cliff" viewBox="0 0 420 820" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+    <defs>
+      <linearGradient id="lit" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#c97c68" />
+        <stop offset="1" stop-color="#9a4a44" />
+      </linearGradient>
+      <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#6f3236" />
+        <stop offset="1" stop-color="#4c2230" />
+      </linearGradient>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2b1b3a" stop-opacity=".25" />
+        <stop offset=".5" stop-color="#2b1b3a" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z" fill="url(#shade)" />
+    <!-- lit column faces -->
+    <path d="M75 300 L110 270 L112 760 L78 770 Z" fill="url(#lit)" />
+    <path d="M120 120 L170 90 L168 760 L122 762 Z" fill="url(#lit)" />
+    <path d="M180 20 L240 8 L236 760 L184 758 Z" fill="url(#lit)" />
+    <path d="M262 6 L312 3 L310 760 L264 760 Z" fill="url(#lit)" />
+    <path d="M336 2 L384 1 L382 760 L338 760 Z" fill="url(#lit)" />
+    <!-- fractures -->
+    <g stroke="#4c2230" stroke-width="3" opacity=".55">
+      <path d="M80 420 L108 412 M124 260 L166 248 M126 520 L164 512 M186 180 L232 170 M188 430 L232 422" />
+      <path d="M268 120 L308 116 M266 340 L308 334 M268 600 L308 596 M340 220 L380 218 M340 470 L380 466" />
+    </g>
+    <rect width="420" height="820" fill="url(#fade)" />
+    <!-- rubble at the base -->
+    <path d="M0 820 L6 770 L40 752 L70 764 L96 742 L140 750 L170 736 L214 748 L250 734 L300 746 L360 732 L420 740 L420 820 Z" fill="#7a3d3c" />
+    <path d="M6 770 L40 752 L52 790 L18 800 Z M96 742 L140 750 L134 784 L100 780 Z M214 748 L250 734 L258 770 L222 778 Z" fill="#b0645a" />
+  </svg>
+
+  <div class="sand" aria-hidden="true"></div>
+
+  <a class="dig" href="#projects">Dig into my projects <span aria-hidden="true">↓</span></a>
+</header>
+
+<style>
+  .beach {
+    --horizon: 60%;
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+    background: linear-gradient(
+      to bottom,
+      #14215a 0%,
+      #23398a 30%,
+      #4a63b4 48%,
+      #9b94cf var(--horizon)
+    );
+    isolation: isolate;
+  }
+
+  /* Airbrush grain over the whole scene */
+  .beach::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    opacity: 0.35;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .intro {
+    position: absolute;
+    top: clamp(1.5rem, 9vh, 6rem);
+    left: 6vw;
+    right: 6vw;
+    z-index: 6;
+    color: #fff;
+    text-shadow: 0 2px 18px rgb(20 20 70 / 0.55);
+  }
+  .intro h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .titles {
+    margin: 0.6rem 0 0;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    color: #e6e2ff;
+  }
+  .sep { opacity: 0.7; }
+
+  /* Clickable sky objects */
+  .sky-link {
+    position: absolute;
+    z-index: 6;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+  }
+  .sky-link svg { position: relative; width: 100%; height: auto; }
+  .sky-link:focus-visible { outline: 3px solid #fff; outline-offset: 10px; }
+
+  .label {
+    position: absolute;
+    top: 100%;
+    margin-top: 0.6rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+    text-shadow: 0 1px 8px rgb(20 20 70 / 0.8);
+  }
+  .sky-link:hover .label,
+  .sky-link:focus-visible .label { opacity: 1; transform: none; }
+
+  .moon {
+    width: clamp(64px, 9vw, 120px);
+    left: 50%;
+    top: 16%;
+    filter: drop-shadow(0 0 18px rgb(255 255 255 / 0.65));
+    transition: transform 0.25s;
+  }
+  .moon:hover { transform: scale(1.06); }
+  .halo {
+    position: absolute;
+    inset: -70%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(230 235 255 / 0.35) 0%, rgb(230 235 255 / 0) 65%);
+  }
+
+  .resume {
+    width: clamp(40px, 4.5vw, 64px);
+    left: 12vw;
+    top: 44%;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgb(255 240 210 / 0.5)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 22px rgb(255 240 210 / 0.95)); }
+  }
+
+  .far-cliffs {
+    position: absolute;
+    left: 4vw;
+    bottom: calc(100% - var(--horizon));
+    width: 34vw;
+    height: 7vh;
+    z-index: 1;
+  }
+
+  .sea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--horizon);
+    height: 20%;
+    background: linear-gradient(to bottom, #2c5fb4, #3f86d6 70%, #7db3e8);
+    z-index: 1;
+  }
+  .foam {
+    position: absolute;
+    bottom: -6px;
+    left: -5%;
+    width: 110%;
+    height: 34px;
+    animation: drift 9s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translateX(3%); } }
+
+  .rocks {
+    position: absolute;
+    left: 7vw;
+    top: calc(var(--horizon) + 4%);
+    width: clamp(70px, 10vw, 150px);
+    z-index: 2;
+  }
+
+  .cliff {
+    position: absolute;
+    right: 0;
+    bottom: 14%;
+    height: 84%;
+    width: auto;
+    max-width: 46vw;
+    z-index: 3;
+  }
+
+  .sand {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 22%;
+    background: var(--grain-coarse), linear-gradient(to bottom, #e9dcc3, var(--sand));
+    border-top-left-radius: 50% 30%;
+    border-top-right-radius: 60% 10%;
+    z-index: 4;
+  }
+
+  .dig {
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    z-index: 6;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    background: rgb(60 35 40 / 0.78);
+    color: #fff8ec;
+    text-decoration: none;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+  .dig:hover, .dig:focus-visible { background: rgb(60 35 40 / 0.95); }
+
+  @media (max-width: 700px) {
+    .intro { top: 6svh; }
+    .moon { left: 26vw; top: 34%; }
+    .resume { left: 8vw; top: 48%; }
+    .cliff { max-width: 40vw; height: 72%; }
+    .far-cliffs { width: 44vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .resume {
+      animation: none;
+      filter: drop-shadow(0 0 16px rgb(255 240 210 / 0.9));
+    }
+    .foam { animation: none; }
+    .moon, .label { transition: none; }
+  }
+</style>
