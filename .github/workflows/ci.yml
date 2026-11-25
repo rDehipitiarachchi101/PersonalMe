@@ -1,0 +1,50 @@
+name: CI
+
+# Runs on every push and every pull request.
+on:
+  push:
+  pull_request:
+
+# This workflow only reads the code; it needs no write access.
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Formatting (Prettier)
+        run: npm run format:check
+
+      - name: Type check (astro check)
+        run: npm run check
+
+      # Also validates every project file against the content schema.
+      - name: Build
+        run: npm run build
+
+      - name: Link check (built pages)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --root-dir "${{ github.workspace }}/dist"
+            --exclude 'linkedin\.com'
+            'dist/**/*.html'
+          fail: true
+
+      - name: Dependency audit (high and critical only)
+        run: npm audit --audit-level=high

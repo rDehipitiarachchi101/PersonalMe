@@ -19,7 +19,10 @@ const projects = (await getCollection('projects')).sort(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="description" content={`${site.name}: ${site.titles.join(', ')}. Portfolio and projects.`} />
+    <meta
+      name="description"
+      content={`${site.name}: ${site.titles.join(', ')}. Portfolio and projects.`}
+    />
     <title>{site.name} | Portfolio</title>
   </head>
   <body>
@@ -30,7 +33,9 @@ const projects = (await getCollection('projects')).sort(
         <h2>Projects</h2>
         <p class="lede">Dug up from beneath the sand. Featured work first.</p>
         <div class="list">
-          {projects.map((project) => <ProjectCard project={project} />)}
+          {projects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
         </div>
       </div>
 
@@ -38,7 +43,9 @@ const projects = (await getCollection('projects')).sort(
         <p>
           Get in touch: <a href={`mailto:${site.email}`}>{site.email}</a>
           <span aria-hidden="true"> · </span>
-          <a href={site.resumePath} download={site.resumeFileName}>Download resume</a>
+          <a href={site.resumePath} download={site.resumeFileName}>
+            Download resume
+          </a>
         </p>
       </footer>
     </main>
@@ -58,15 +65,23 @@ const projects = (await getCollection('projects')).sort(
     --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.97 0 0 0 0 0.9 0 2.8 0 0 -1.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
     color-scheme: light;
   }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     margin: 0;
     background: #2a1b2c;
     font-family: 'Avenir Next', Avenir, 'Futura', 'Century Gothic', system-ui, sans-serif;
   }
-  h1, h2, h3 { font-family: 'Futura', 'Avenir Next', 'Century Gothic', system-ui, sans-serif; }
+  h1,
+  h2,
+  h3 {
+    font-family: 'Futura', 'Avenir Next', 'Century Gothic', system-ui, sans-serif;
+  }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+    html {
+      scroll-behavior: auto;
+    }
   }
 </style>
 
@@ -80,15 +95,34 @@ const projects = (await getCollection('projects')).sort(
       var(--grain-coarse) 0 0 / 160px,
       var(--grain-coarse) 40px 70px / 97px,
       repeating-linear-gradient(to bottom, transparent 0 140px, rgb(60 30 30 / 0.08) 140px 146px),
-      linear-gradient(to bottom, var(--sand) 0%, #b8946c 25%, #8a6248 50%, #4e3238 75%, #2a1b2c 100%);
+      linear-gradient(
+        to bottom,
+        var(--sand) 0%,
+        #b8946c 25%,
+        #8a6248 50%,
+        #4e3238 75%,
+        #2a1b2c 100%
+      );
     color: #2b1d24;
     min-height: 120vh;
     box-sizing: border-box;
   }
-  .inner { max-width: 960px; margin: 0 auto; }
-  h2 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); }
-  .lede { margin: 0.4rem 0 2rem; color: #5a3c34; }
-  .list { display: grid; gap: 2rem; }
+  .inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  .lede {
+    margin: 0.4rem 0 2rem;
+    color: #5a3c34;
+  }
+  .list {
+    display: grid;
+    gap: 2rem;
+  }
   footer {
     max-width: 960px;
     margin: 5rem auto 0;
@@ -97,5 +131,7 @@ const projects = (await getCollection('projects')).sort(
     color: #f3e6d2;
     text-align: center;
   }
-  footer a { color: #ffd99a; }
+  footer a {
+    color: #ffd99a;
+  }
 </style>

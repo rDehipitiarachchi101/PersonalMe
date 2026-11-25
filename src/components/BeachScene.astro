@@ -11,7 +11,12 @@ import { site } from '../data/site';
     <p class="titles">
       {site.titles.map((t, i) => (
         <>
-          {i > 0 && <span class="sep" aria-hidden="true"> · </span>}
+          {i > 0 && (
+            <span class="sep" aria-hidden="true">
+              {' '}
+              ·{' '}
+            </span>
+          )}
           <span>{t}</span>
         </>
       ))}
@@ -26,13 +31,24 @@ import { site } from '../data/site';
     <span class="halo" aria-hidden="true"></span>
     <svg viewBox="0 0 64 48" aria-hidden="true">
       <rect x="3" y="3" width="58" height="42" rx="5" fill="#eef1ff" />
-      <path d="M5 7 L32 28 L59 7" fill="none" stroke="#aebbe8" stroke-width="3.5" stroke-linejoin="round" />
+      <path
+        d="M5 7 L32 28 L59 7"
+        fill="none"
+        stroke="#aebbe8"
+        stroke-width="3.5"
+        stroke-linejoin="round"
+      />
     </svg>
     <span class="label">Email me</span>
   </a>
 
   <!-- Pulsing resume: downloads the PDF -->
-  <a class="sky-link resume" href={site.resumePath} download={site.resumeFileName} aria-label="Download resume (PDF)">
+  <a
+    class="sky-link resume"
+    href={site.resumePath}
+    download={site.resumeFileName}
+    aria-label="Download resume (PDF)"
+  >
     <svg viewBox="0 0 48 60" aria-hidden="true">
       <path d="M4 4 H32 L44 16 V56 H4 Z" fill="#fff8ec" />
       <path d="M32 4 V16 H44" fill="#e6d6bd" />
@@ -61,7 +77,10 @@ import { site } from '../data/site';
       </linearGradient>
     </defs>
     <!-- shadowed body -->
-    <path d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z" fill="url(#farShade)" />
+    <path
+      d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z"
+      fill="url(#farShade)"
+    />
     <!-- sunlit face -->
     <path d="M8 20 L22 14 L122 14 L119 60 L0 60 Z" fill="url(#farLit)" />
     <!-- lower step on the right -->
@@ -71,20 +90,39 @@ import { site } from '../data/site';
     <path d="M22 14 L205 13 L206 16 L24 17 Z" fill="#f7dcdc" />
     <!-- eroded vertical ridges -->
     <g stroke-width="2.2">
-      <path d="M30 17 V60 M47 17 V60 M64 16 V60 M83 16 V60 M101 16 V60" stroke="#b9849e" opacity=".75" />
-      <path d="M34 17 V60 M52 17 V60 M69 16 V60 M88 16 V60 M106 16 V60" stroke="#f8dede" opacity=".5" />
-      <path d="M140 16 V60 M157 16 V60 M175 16 V60 M193 16 V60 M240 32 V60 M252 32 V60" stroke="#8f6890" opacity=".5" />
+      <path
+        d="M30 17 V60 M47 17 V60 M64 16 V60 M83 16 V60 M101 16 V60"
+        stroke="#b9849e"
+        opacity=".75"
+      />
+      <path
+        d="M34 17 V60 M52 17 V60 M69 16 V60 M88 16 V60 M106 16 V60"
+        stroke="#f8dede"
+        opacity=".5"
+      />
+      <path
+        d="M140 16 V60 M157 16 V60 M175 16 V60 M193 16 V60 M240 32 V60 M252 32 V60"
+        stroke="#8f6890"
+        opacity=".5"
+      />
       <path d="M146 16 V60 M168 16 V60 M186 16 V60" stroke="#dcb8ca" opacity=".45" />
     </g>
     <!-- deep crevice where light turns to shadow -->
     <path d="M119 14 L124 14 L122 60 L117 60 Z" fill="#8f6890" opacity=".6" />
     <!-- sea mist at the base -->
-    <path d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z" fill="url(#farMist)" />
+    <path
+      d="M0 60 L8 20 L22 14 L205 13 L214 20 L222 28 L300 27 L318 33 L340 38 L400 46 L400 60 Z"
+      fill="url(#farMist)"
+    />
   </svg>
 
   <div class="sea" aria-hidden="true">
     <svg class="foam" viewBox="0 0 1200 40" preserveAspectRatio="none">
-      <path d="M0 22 C120 8 220 34 360 20 S600 6 760 22 S1020 36 1200 18 V40 H0 Z" fill="#f4f7ff" opacity=".85" />
+      <path
+        d="M0 22 C120 8 220 34 360 20 S600 6 760 22 S1020 36 1200 18 V40 H0 Z"
+        fill="#f4f7ff"
+        opacity=".85"
+      />
     </svg>
   </div>
 
@@ -93,7 +131,12 @@ import { site } from '../data/site';
   <!-- Tiny boat carrying the credit for the scene's inspiration.
        Hover or keyboard focus shows the credit; a tap toggles it on phones. -->
   <div class="boat">
-    <button type="button" aria-expanded="false" aria-describedby="boat-credit" aria-label="Scene credit">
+    <button
+      type="button"
+      aria-expanded="false"
+      aria-describedby="boat-credit"
+      aria-label="Scene credit"
+    >
       <svg viewBox="0 0 40 36" aria-hidden="true">
         <path d="M19 9 L19 24 L9 24 Z" fill="#f1c9b5" />
         <path d="M21 4 L21 24 L33 24 Z" fill="#fff4e8" />
@@ -157,7 +200,10 @@ import { site } from '../data/site';
         <stop offset=".5" stop-color="#2b1b3a" stop-opacity="0" />
       </linearGradient>
     </defs>
-    <path d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z" fill="url(#shade)" />
+    <path
+      d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z"
+      fill="url(#shade)"
+    />
     <!-- lit column faces -->
     <path d="M75 300 L110 270 L112 760 L78 770 Z" fill="url(#lit)" />
     <path d="M120 120 L170 90 L168 760 L122 762 Z" fill="url(#lit)" />
@@ -189,15 +235,26 @@ import { site } from '../data/site';
       <path d="M80 420 L108 412 M124 260 L166 248 M126 520 L164 512 M186 180 L232 170 M188 430 L232 422" />
       <path d="M268 120 L308 116 M266 340 L308 334 M268 600 L308 596 M340 220 L380 218 M340 470 L380 466" />
     </g>
-    <path d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z" fill="url(#fade)" />
+    <path
+      d="M40 820 L40 560 L70 520 L75 300 L110 270 L120 120 L170 90 L180 20 L240 8 L420 0 L420 820 Z"
+      fill="url(#fade)"
+    />
     <!-- rubble at the base -->
-    <path d="M0 820 L6 770 L40 752 L70 764 L96 742 L140 750 L170 736 L214 748 L250 734 L300 746 L360 732 L420 740 L420 820 Z" fill="#7a3d3c" />
-    <path d="M6 770 L40 752 L52 790 L18 800 Z M96 742 L140 750 L134 784 L100 780 Z M214 748 L250 734 L258 770 L222 778 Z" fill="#b0645a" />
+    <path
+      d="M0 820 L6 770 L40 752 L70 764 L96 742 L140 750 L170 736 L214 748 L250 734 L300 746 L360 732 L420 740 L420 820 Z"
+      fill="#7a3d3c"
+    />
+    <path
+      d="M6 770 L40 752 L52 790 L18 800 Z M96 742 L140 750 L134 784 L100 780 Z M214 748 L250 734 L258 770 L222 778 Z"
+      fill="#b0645a"
+    />
   </svg>
 
   <div class="sand" aria-hidden="true"></div>
 
-  <a class="dig" href="#projects">Dig into my projects <span aria-hidden="true">↓</span></a>
+  <a class="dig" href="#projects">
+    Dig into my projects <span aria-hidden="true">↓</span>
+  </a>
 </header>
 
 <script>
@@ -258,11 +315,24 @@ import { site } from '../data/site';
     cursor: pointer;
     animation: bob 3.2s ease-in-out infinite;
   }
-  .boat svg { display: block; width: 100%; height: auto; }
-  .boat button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px; }
+  .boat svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .boat button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
   @keyframes bob {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-2px) rotate(2deg); }
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-2px) rotate(2deg);
+    }
   }
   .credit {
     position: absolute;
@@ -280,10 +350,14 @@ import { site } from '../data/site';
     text-align: center;
     opacity: 0;
     transform: translate(-50%, 4px);
-    transition: opacity 0.2s, transform 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
     pointer-events: none;
   }
-  .credit cite { font-style: italic; }
+  .credit cite {
+    font-style: italic;
+  }
   .boat:hover .credit,
   .boat button:focus-visible + .credit,
   .boat button[aria-expanded='true'] + .credit {
@@ -364,7 +438,9 @@ import { site } from '../data/site';
     font-size: clamp(1rem, 2.2vw, 1.5rem);
     color: #e6e2ff;
   }
-  .sep { opacity: 0.7; }
+  .sep {
+    opacity: 0.7;
+  }
 
   /* Clickable sky objects */
   .sky-link {
@@ -375,8 +451,15 @@ import { site } from '../data/site';
     border-radius: 50%;
     text-decoration: none;
   }
-  .sky-link svg { position: relative; width: 100%; height: auto; }
-  .sky-link:focus-visible { outline: 3px solid #fff; outline-offset: 10px; }
+  .sky-link svg {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .sky-link:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 10px;
+  }
 
   .label {
     position: absolute;
@@ -387,11 +470,16 @@ import { site } from '../data/site';
     color: #fff;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity 0.2s, transform 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
     text-shadow: 0 1px 8px rgb(20 20 70 / 0.8);
   }
   .sky-link:hover .label,
-  .sky-link:focus-visible .label { opacity: 1; transform: none; }
+  .sky-link:focus-visible .label {
+    opacity: 1;
+    transform: none;
+  }
 
   .moon {
     width: clamp(64px, 9vw, 120px);
@@ -402,13 +490,18 @@ import { site } from '../data/site';
      Hovering brings it into focus. */
   .moon svg {
     opacity: 0.6;
-    filter: blur(0.6px) drop-shadow(0 0 14px rgb(235 240 255 / 0.9)) drop-shadow(0 0 34px rgb(200 215 255 / 0.6));
-    transition: opacity 0.3s, filter 0.3s, transform 0.25s;
+    filter: blur(0.6px) drop-shadow(0 0 14px rgb(235 240 255 / 0.9))
+      drop-shadow(0 0 34px rgb(200 215 255 / 0.6));
+    transition:
+      opacity 0.3s,
+      filter 0.3s,
+      transform 0.25s;
   }
   .moon:hover svg,
   .moon:focus-visible svg {
     opacity: 0.95;
-    filter: drop-shadow(0 0 14px rgb(235 240 255 / 0.95)) drop-shadow(0 0 34px rgb(200 215 255 / 0.7));
+    filter: drop-shadow(0 0 14px rgb(235 240 255 / 0.95))
+      drop-shadow(0 0 34px rgb(200 215 255 / 0.7));
     transform: scale(1.06);
   }
   .halo {
@@ -425,8 +518,15 @@ import { site } from '../data/site';
     animation: pulse 2.4s ease-in-out infinite;
   }
   @keyframes pulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgb(255 240 210 / 0.5)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 22px rgb(255 240 210 / 0.95)); }
+    0%,
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 6px rgb(255 240 210 / 0.5));
+    }
+    50% {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 22px rgb(255 240 210 / 0.95));
+    }
   }
 
   .far-cliffs {
@@ -455,7 +555,11 @@ import { site } from '../data/site';
     height: 34px;
     animation: drift 9s ease-in-out infinite alternate;
   }
-  @keyframes drift { to { transform: translateX(3%); } }
+  @keyframes drift {
+    to {
+      transform: translateX(3%);
+    }
+  }
 
   .rocks {
     position: absolute;
@@ -500,7 +604,12 @@ import { site } from '../data/site';
   /* Wet foam line where the wave washes up the beach */
   .wash {
     height: calc(22% + 10px);
-    background: linear-gradient(to bottom, rgb(246 250 255 / 0.9), rgb(200 220 245 / 0.55) 12px, transparent 22px);
+    background: linear-gradient(
+      to bottom,
+      rgb(246 250 255 / 0.9),
+      rgb(200 220 245 / 0.55) 12px,
+      transparent 22px
+    );
     z-index: 3;
   }
 
@@ -511,7 +620,13 @@ import { site } from '../data/site';
     right: 0;
     top: calc(var(--horizon) - 10%);
     height: 16%;
-    background: linear-gradient(to bottom, transparent, rgb(226 206 236 / 0.45) 62%, rgb(190 200 240 / 0.15) 75%, transparent);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(226 206 236 / 0.45) 62%,
+      rgb(190 200 240 / 0.15) 75%,
+      transparent
+    );
     pointer-events: none;
     z-index: 2;
   }
@@ -532,10 +647,21 @@ import { site } from '../data/site';
     z-index: 2;
     animation: ripple 2.4s ease-in-out infinite;
   }
-  .reflection svg { width: 100%; height: auto; display: block; }
+  .reflection svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
   @keyframes ripple {
-    0%, 100% { transform: scaleY(-1) scaleX(1); opacity: 0.3; }
-    50% { transform: scaleY(-1.05) scaleX(1.08); opacity: 0.45; }
+    0%,
+    100% {
+      transform: scaleY(-1) scaleX(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scaleY(-1.05) scaleX(1.08);
+      opacity: 0.45;
+    }
   }
 
   .dig {
@@ -552,16 +678,39 @@ import { site } from '../data/site';
     font-size: 0.95rem;
     white-space: nowrap;
   }
-  .dig:hover, .dig:focus-visible { background: rgb(60 35 40 / 0.95); }
+  .dig:hover,
+  .dig:focus-visible {
+    background: rgb(60 35 40 / 0.95);
+  }
 
   @media (max-width: 700px) {
-    .intro { top: 6svh; right: 6vw; max-width: none; }
-    .intro h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
-    .beach { --resume-top: 44%; }
-    .moon { left: auto; right: 10vw; top: 22%; }
-    .resume, .reflection { left: 8vw; }
-    .cliff { max-width: 40vw; height: 72%; }
-    .far-cliffs { width: 44vw; }
+    .intro {
+      top: 6svh;
+      right: 6vw;
+      max-width: none;
+    }
+    .intro h1 {
+      font-size: clamp(2rem, 9vw, 2.6rem);
+    }
+    .beach {
+      --resume-top: 44%;
+    }
+    .moon {
+      left: auto;
+      right: 10vw;
+      top: 22%;
+    }
+    .resume,
+    .reflection {
+      left: 8vw;
+    }
+    .cliff {
+      max-width: 40vw;
+      height: 72%;
+    }
+    .far-cliffs {
+      width: 44vw;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -569,8 +718,17 @@ import { site } from '../data/site';
       animation: none;
       filter: drop-shadow(0 0 16px rgb(255 240 210 / 0.9));
     }
-    .foam, .reflection, .boat button { animation: none; }
-    .credit { transition: none; }
-    .moon svg, .label { transition: none; }
+    .foam,
+    .reflection,
+    .boat button {
+      animation: none;
+    }
+    .credit {
+      transition: none;
+    }
+    .moon svg,
+    .label {
+      transition: none;
+    }
   }
 </style>
